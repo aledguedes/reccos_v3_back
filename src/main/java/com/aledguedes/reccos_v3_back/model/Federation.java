@@ -2,36 +2,22 @@ package com.aledguedes.reccos_v3_back.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.EqualsAndHashCode;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
-@Data
 @Entity
 @Table(name = "federations")
-public class Federation {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class Federation extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @Column
     private String description;
 
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    @OneToMany(mappedBy = "federation", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserFederation> users;
+    @OneToMany(mappedBy = "federation")
+    private List<User> users;
 }

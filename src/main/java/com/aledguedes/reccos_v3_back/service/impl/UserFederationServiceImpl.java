@@ -1,4 +1,4 @@
-package com.aledguedes.reccos_v3_back.service;
+package com.aledguedes.reccos_v3_back.service.impl;
 
 import com.aledguedes.reccos_v3_back.dto.FederationDTO;
 import com.aledguedes.reccos_v3_back.dto.UserDTO;
@@ -12,6 +12,8 @@ import com.aledguedes.reccos_v3_back.model.UserFederation;
 import com.aledguedes.reccos_v3_back.repository.FederationRepository;
 import com.aledguedes.reccos_v3_back.repository.UserFederationRepository;
 import com.aledguedes.reccos_v3_back.repository.UserRepository;
+import com.aledguedes.reccos_v3_back.service.UserFederationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

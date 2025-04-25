@@ -1,21 +1,34 @@
 package com.aledguedes.reccos_v3_back.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
+import java.util.UUID;
+
 @Entity
 @Table(name = "owners")
-public class Owner extends BaseEntity {
+@Getter
+@Setter
+public class Owner {
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Id
+    @GeneratedValue
+    private UUID id;
+
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.OWNER;
+
+    @Column(nullable = false)
+    private boolean emailVerified;
 }

@@ -4,6 +4,7 @@ import com.aledguedes.reccos_v3_back.dto.FederationDTO;
 import com.aledguedes.reccos_v3_back.service.UserFederationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class UserFederationController {
     private UserFederationService userFederationService;
 
     @PostMapping("/{federationId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('OWNER')")
     public ResponseEntity<Void> associateUserToFederation(
             @PathVariable UUID userId,
             @PathVariable UUID federationId) {
@@ -25,6 +27,7 @@ public class UserFederationController {
     }
 
     @DeleteMapping("/{federationId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('OWNER')")
     public ResponseEntity<Void> removeUserFromFederation(
             @PathVariable UUID userId,
             @PathVariable UUID federationId) {
@@ -33,6 +36,7 @@ public class UserFederationController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN') or hasRole('OWNER')")
     public ResponseEntity<List<FederationDTO>> getFederationsByUser(@PathVariable UUID userId) {
         return ResponseEntity.ok(userFederationService.getFederationsByUser(userId));
     }

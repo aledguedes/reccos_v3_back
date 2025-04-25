@@ -1,10 +1,12 @@
-package com.aledguedes.reccos_v3_back.service;
+package com.aledguedes.reccos_v3_back.service.impl;
 
 import com.aledguedes.reccos_v3_back.dto.OwnerDTO;
 import com.aledguedes.reccos_v3_back.exception.DuplicateResourceException;
 import com.aledguedes.reccos_v3_back.mapper.OwnerMapper;
 import com.aledguedes.reccos_v3_back.model.Owner;
 import com.aledguedes.reccos_v3_back.repository.OwnerRepository;
+import com.aledguedes.reccos_v3_back.service.OwnerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,8 @@ public class OwnerServiceImpl implements OwnerService {
         owner.setEmail(ownerDTO.email());
         owner.setUsername(ownerDTO.username());
         owner.setPassword(passwordEncoder.encode(ownerDTO.password()));
+        owner.setRole(com.aledguedes.reccos_v3_back.model.Role.OWNER); // Definir a role padrão
+        owner.setEmailVerified(true); // Definir emailVerified como falso por padrão
 
         Owner savedOwner = ownerRepository.save(owner);
         return ownerMapper.toOwnerDTO(savedOwner);

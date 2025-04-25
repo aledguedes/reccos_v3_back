@@ -1,4 +1,4 @@
-package com.aledguedes.reccos_v3_back.service;
+package com.aledguedes.reccos_v3_back.service.impl;
 
 import com.aledguedes.reccos_v3_back.dto.FederationDTO;
 import com.aledguedes.reccos_v3_back.exception.DuplicateResourceException;
@@ -6,6 +6,8 @@ import com.aledguedes.reccos_v3_back.exception.NotFoundException;
 import com.aledguedes.reccos_v3_back.mapper.FederationMapper;
 import com.aledguedes.reccos_v3_back.model.Federation;
 import com.aledguedes.reccos_v3_back.repository.FederationRepository;
+import com.aledguedes.reccos_v3_back.service.FederationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
