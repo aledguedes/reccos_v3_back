@@ -3,6 +3,7 @@ package com.aledguedes.reccos_v3_back.service;
 import com.aledguedes.reccos_v3_back.config.JwtTokenProvider;
 import com.aledguedes.reccos_v3_back.dto.LoginRequestDTO;
 import com.aledguedes.reccos_v3_back.dto.LoginResponseDTO;
+import com.aledguedes.reccos_v3_back.exception.InvalidCredentialsException;
 import com.aledguedes.reccos_v3_back.model.Owner;
 import com.aledguedes.reccos_v3_back.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +24,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
-
         Owner owner = ownerRepository.findByEmail(loginRequestDTO.email())
-                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid email or password"));
 
         if (!passwordEncoder.matches(loginRequestDTO.password(), owner.getPassword())) {
-            throw new RuntimeException("Invalid email or password");
+            throw new InvalidCredentialsException("Invalid email or password");
         }
-        
 
         String token = jwtTokenProvider.generateToken(owner.getEmail());
-
         return new LoginResponseDTO(token, owner.getEmail());
     }
 }
