@@ -4,17 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Entity
 @Table(name = "owners")
 @Getter
 @Setter
-public class Owner {
-
-    @Id
-    @GeneratedValue
-    private UUID id;
+public class Owner extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String email;

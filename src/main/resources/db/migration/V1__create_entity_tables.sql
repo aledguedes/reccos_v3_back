@@ -3,6 +3,8 @@ CREATE TABLE owners (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL UNIQUE,
+    email_verified BOOLEAN NOT NULL DEFAULT FALSE,
+    role VARCHAR(50) NOT NULL DEFAULT 'OWNER',
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );

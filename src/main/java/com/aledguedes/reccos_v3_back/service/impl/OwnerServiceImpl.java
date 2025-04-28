@@ -4,6 +4,7 @@ import com.aledguedes.reccos_v3_back.dto.OwnerDTO;
 import com.aledguedes.reccos_v3_back.exception.DuplicateResourceException;
 import com.aledguedes.reccos_v3_back.mapper.OwnerMapper;
 import com.aledguedes.reccos_v3_back.model.Owner;
+import com.aledguedes.reccos_v3_back.model.Role;
 import com.aledguedes.reccos_v3_back.repository.OwnerRepository;
 import com.aledguedes.reccos_v3_back.service.OwnerService;
 
@@ -40,8 +41,8 @@ public class OwnerServiceImpl implements OwnerService {
         owner.setEmail(ownerDTO.email());
         owner.setUsername(ownerDTO.username());
         owner.setPassword(passwordEncoder.encode(ownerDTO.password()));
-        owner.setRole(com.aledguedes.reccos_v3_back.model.Role.OWNER); // Definir a role padrão
-        owner.setEmailVerified(true); // Definir emailVerified como falso por padrão
+        owner.setRole(Role.OWNER);
+        owner.setEmailVerified(true);
 
         Owner savedOwner = ownerRepository.save(owner);
         return ownerMapper.toOwnerDTO(savedOwner);
