@@ -8,7 +8,6 @@ import com.aledguedes.reccos_v3_back.model.Federation;
 import com.aledguedes.reccos_v3_back.repository.FederationRepository;
 import com.aledguedes.reccos_v3_back.service.FederationService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,11 +17,13 @@ import java.util.stream.Collectors;
 @Service
 public class FederationServiceImpl implements FederationService {
 
-    @Autowired
-    private FederationRepository federationRepository;
+    private final FederationRepository federationRepository;
+    private final FederationMapper federationMapper;
 
-    @Autowired
-    private FederationMapper federationMapper;
+    public FederationServiceImpl(FederationRepository federationRepository, FederationMapper federationMapper) {
+        this.federationRepository = federationRepository;
+        this.federationMapper = federationMapper;
+    }
 
     @Override
     public FederationDTO createFederation(FederationDTO federationDTO) {

@@ -8,21 +8,22 @@ import com.aledguedes.reccos_v3_back.model.Owner;
 import com.aledguedes.reccos_v3_back.repository.OwnerRepository;
 import com.aledguedes.reccos_v3_back.service.AuthService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private OwnerRepository ownerRepository;
+    private final OwnerRepository ownerRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    public AuthServiceImpl(OwnerRepository ownerRepository, PasswordEncoder passwordEncoder,
+            JwtTokenProvider jwtTokenProvider) {
+        this.ownerRepository = ownerRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {

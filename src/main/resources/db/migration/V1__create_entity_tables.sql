@@ -36,3 +36,14 @@ CREATE TABLE user_federations (
     CONSTRAINT fk_federation FOREIGN KEY (federation_id) REFERENCES federations(id) ON DELETE CASCADE,
     CONSTRAINT uk_user_federation UNIQUE (user_id, federation_id)
 );
+
+CREATE TABLE verification_codes (
+    id UUID PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    code VARCHAR(6) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    expires_at TIMESTAMP NOT NULL,
+    used BOOLEAN NOT NULL DEFAULT FALSE,
+    CONSTRAINT uk_email_code UNIQUE (email, code)
+);

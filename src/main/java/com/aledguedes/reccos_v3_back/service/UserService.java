@@ -18,11 +18,10 @@ public interface UserService {
 
     UserDTO getUserById(UUID id);
 
-    UserDTO updateUser(UUID id, UserDTO userDTO);
+    UserDTO updateUser(UserDTO userDTO);
 
     void deleteUser(UUID id);
 
-    // Métodos do fluxo de cadastro
     void registerUser(UserRegisterDTO userRegisterDTO);
 
     void verifyEmail(VerifyEmailDTO verifyEmailDTO);
