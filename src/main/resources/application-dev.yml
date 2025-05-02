@@ -17,8 +17,10 @@ spring:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
+    clean-on-validation-error: true
+    clean-disabled: false
 
 logging:
   level:
-    org.springframework: DEBUG  # Mais detalhes no ambiente de desenvolvimento
+    org.springframework: DEBUG
     com.aledguedes: DEBUG
