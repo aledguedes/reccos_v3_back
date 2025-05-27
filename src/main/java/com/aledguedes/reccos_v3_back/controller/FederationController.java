@@ -1,21 +1,26 @@
 package com.aledguedes.reccos_v3_back.controller;
 
-import com.aledguedes.reccos_v3_back.dto.FederationDTO;
-import com.aledguedes.reccos_v3_back.dto.UserCompleteDTO;
-import com.aledguedes.reccos_v3_back.dto.UserDTO;
-import com.aledguedes.reccos_v3_back.dto.UserRegisterDTO;
-import com.aledguedes.reccos_v3_back.dto.VerifyEmailDTO;
-import com.aledguedes.reccos_v3_back.service.FederationService;
-import com.aledguedes.reccos_v3_back.service.UserFederationService;
-import com.aledguedes.reccos_v3_back.service.UserService;
-
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.aledguedes.reccos_v3_back.dto.FederationDTO;
+import com.aledguedes.reccos_v3_back.dto.UserDTO;
+import com.aledguedes.reccos_v3_back.service.FederationService;
+import com.aledguedes.reccos_v3_back.service.UserFederationService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/federations")
@@ -26,9 +31,6 @@ public class FederationController {
 
     @Autowired
     private UserFederationService userFederationService;
-
-    @Autowired
-    private UserService userService;
 
     @PostMapping
     public ResponseEntity<FederationDTO> createFederation(@Valid @RequestBody FederationDTO federationDTO) {
@@ -62,24 +64,5 @@ public class FederationController {
     @GetMapping("/{federationId}/users")
     public ResponseEntity<List<UserDTO>> getUsersByFederation(@PathVariable UUID federationId) {
         return ResponseEntity.ok(userFederationService.getUsersByFederation(federationId));
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserRegisterDTO userRegisterDTO) {
-        userService.registerUser(userRegisterDTO);
-        return ResponseEntity.ok("User registered. A verification code has been sent to the email.");
-    }
-
-    @PostMapping("/verify-email")
-    public ResponseEntity<String> verifyEmail(@RequestBody VerifyEmailDTO verifyEmailDTO) {
-        userService.verifyEmail(verifyEmailDTO);
-        return ResponseEntity.ok("Email verified successfully");
-    }
-
-    @PostMapping("/complete-registration")
-    public ResponseEntity<String> completeRegistration(@RequestParam String email,
-            @RequestBody UserCompleteDTO userCompleteDTO) {
-        userService.completeRegistration(email, userCompleteDTO);
-        return ResponseEntity.ok("Registration completed successfully");
     }
 }

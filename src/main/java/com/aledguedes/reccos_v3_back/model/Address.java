@@ -26,6 +26,6 @@ public class Address {
     @Column
     private String state;
 
-    @Column
+    @Column(name = "zip_code")
     private String zipCode;
 }

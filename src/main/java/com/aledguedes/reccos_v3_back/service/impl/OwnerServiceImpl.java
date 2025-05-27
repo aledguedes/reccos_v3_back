@@ -15,14 +15,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class OwnerServiceImpl implements OwnerService {
 
-    @Autowired
     private OwnerRepository ownerRepository;
-
-    @Autowired
     private OwnerMapper ownerMapper;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public OwnerServiceImpl(
+            @Autowired OwnerRepository ownerRepository,
+            @Autowired OwnerMapper ownerMapper,
+            @Autowired PasswordEncoder passwordEncoder) {
+        this.ownerRepository = ownerRepository;
+        this.ownerMapper = ownerMapper;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public OwnerDTO createOwner(OwnerDTO ownerDTO) {

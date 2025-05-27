@@ -14,7 +14,6 @@ import com.aledguedes.reccos_v3_back.repository.UserFederationRepository;
 import com.aledguedes.reccos_v3_back.repository.UserRepository;
 import com.aledguedes.reccos_v3_back.service.UserFederationService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,20 +23,21 @@ import java.util.stream.Collectors;
 @Service
 public class UserFederationServiceImpl implements UserFederationService {
 
-        @Autowired
-        private UserRepository userRepository;
+        private final UserMapper userMapper;
+        private final UserRepository userRepository;
+        private final FederationMapper federationMapper;
+        private final FederationRepository federationRepository;
+        private final UserFederationRepository userFederationRepository;
 
-        @Autowired
-        private FederationRepository federationRepository;
-
-        @Autowired
-        private UserFederationRepository userFederationRepository;
-
-        @Autowired
-        private UserMapper userMapper;
-
-        @Autowired
-        private FederationMapper federationMapper;
+        public UserFederationServiceImpl(UserMapper userMapper, UserRepository userRepository,
+                        FederationMapper federationMapper, FederationRepository federationRepository,
+                        UserFederationRepository userFederationRepository) {
+                this.userMapper = userMapper;
+                this.userRepository = userRepository;
+                this.federationMapper = federationMapper;
+                this.federationRepository = federationRepository;
+                this.userFederationRepository = userFederationRepository;
+        }
 
         @Override
         public void associateUserToFederation(UUID userId, UUID federationId) {
